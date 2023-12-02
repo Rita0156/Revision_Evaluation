@@ -47,3 +47,14 @@
     font-size: 20px;
     padding: 10px;
 }
+.det{
+    display: block;
+    margin: auto;
+    font-size: 20px;
+    padding: 10px;
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}

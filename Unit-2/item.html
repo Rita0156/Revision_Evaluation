@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .star{
+            width: 20%;
+           
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+        }
+        p{
+            font-size: 25px;
+            color: black;
+        }
+        .star img{
+            width: 30px;
+            height: 30px;
+        }
+        #container{
+            width: 60%;
+            margin-top: 50px;
+            margin: auto;
+            text-align: center;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            padding: 30px;
+        }
+        .item{
+            width: 300px;
+            height: 300px;
+        }
+        .det{
+    display: block;
+    margin: auto;
+    font-size: 20px;
+    padding: 10px;
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+</html>
+<script>
+    const data=JSON.parse(localStorage.getItem("details"))||[]
+    //data=JSON.parse(data)
+    console.log(data)
+    const container=document.getElementById("container")
+    
+function appendData(itemdata){
+    //data=JSON.parse(data)
+  //for(let ele=0; ele.length; ele++) {
+      let div=document.createElement("div")
+      let title=document.createElement("h2")
+      let img=document.createElement("img")
+      img.className="item"
+      let desc=document.createElement("p")
+      let price=document.createElement("h2")
+      let p=document.createElement("p")
+
+      title.innerText=data.title
+      img.src=data.image
+      desc.innerText=data.description
+      price.innerText="$"+data.price
+      p.innerText=data.category
+
+      let btn=document.createElement("button")
+      let rate=document.createElement("h3")
+      let star=document.createElement("img")
+      rate.innerText=data.rating.rate
+      star.src="https://pngimg.com/d/star_PNG41474.png"
+      btn.innerText="Go Back"
+      btn.className="det"
+       btn.addEventListener("click",()=>{
+         data=''
+          localStorage.setItem("details",JSON.stringify(data))
+          window.location.href="./index.html"
+       })
+       div.className="star"
+      div.append(star,rate)
+      container.append(title,img,desc,price,div,p,btn)
+ // };
+}
+appendData(data)
+</script>

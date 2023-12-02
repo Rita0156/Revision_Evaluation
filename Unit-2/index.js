@@ -1,11 +1,16 @@
 
 const container=document.getElementById("container")
-const token=localStorage.getItem("token")
+let token=localStorage.getItem("token")
 
 //container.addEventListener("load",()=>{
+    let alink=document.getElementsByClassName("link")
     let getData=[]
     let lowData=[]
     let highdata=[]
+  const handalToken =()=>{
+        token=""
+        localStorage.setItem("token",token)
+    }
     
    if(token){
     fetch("https://fakestoreapi.com/products")
@@ -15,8 +20,8 @@ const token=localStorage.getItem("token")
     .then((res)=>{
         console.log(res)
         getData=[...res]
-        lowData=[...res]
-        highdata=[...res]
+        //lowData=[...res]
+        //highdata=[...res]
         appendData(res)
     })
 //})
@@ -43,12 +48,12 @@ price_select.addEventListener("change",()=>{
             return appendData(getData)
          }else{
             if(price_select.value=="acd"){
-               lowData.sort(function(a,b){return Number(a.price)-Number(b.price)})
-              return appendData(lowData)
+               getData.sort(function(a,b){return Number(a.price)-Number(b.price)})
+              return appendData(getData)
             }
             else if(price_select.value=="dcd"){
-                highdata.sort(function(a,b){return Number(b.price)-Number(a.price)})
-               return appendData(highdata)
+                getData.sort(function(a,b){return Number(b.price)-Number(a.price)})
+               return appendData(getData)
             }
          }
     })
@@ -66,10 +71,17 @@ function appendData(data){
 
       title.innerText=ele.title
       img.src=ele.image
-      desc.innerText=ele.description
+      //desc.innerText=ele.description
       price.innerText="$"+ele.price
       p.innerText=ele.category
-      div.append(title,img,desc,price,p)
+      let btn=document.createElement("button")
+      btn.innerText="Detais"
+      btn.className="det"
+       btn.addEventListener("click",()=>{
+          localStorage.setItem("details",JSON.stringify(ele))
+          window.location.href="./item.html"
+       })
+      div.append(title,img,price,p,btn)
       container.append(div)
   });
 }
