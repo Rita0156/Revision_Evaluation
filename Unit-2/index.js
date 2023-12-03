@@ -21,21 +21,23 @@ let token=localStorage.getItem("token")
         console.log(res)
         getData=[...res]
         //lowData=[...res]
-        //highdata=[...res]
+        highdata=[...res]
         appendData(res)
     })
 //})
 
 const select=document.getElementById("select")
 select.addEventListener("change",()=>{
+    lowData=[]
       const dataBy=getData.filter((item)=>{
+          
           if(select.value==""){
               
-              return appendData(getData)
+              return true
           }else{
-            ///getData=[]
+           
             if(item.category==select.value){
-                lowData.push(item)
+              lowData.push(item)
               return true
             }
             else return false
@@ -49,7 +51,11 @@ price_select.addEventListener("change",()=>{
     getData.filter((item)=>{
          if(price_select.value==""){
             ///return true
-            return appendData(getData)
+            if(lowData.length>0){
+                return appendData(lowData)
+            }else{
+                return appendData(getData)
+            }
          }else{
             if(price_select.value=="acd"){
                if(lowData.length>0){
