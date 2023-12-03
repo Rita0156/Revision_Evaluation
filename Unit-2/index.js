@@ -54,7 +54,7 @@ price_select.addEventListener("change",()=>{
             if(lowData.length>0){
                 return appendData(lowData)
             }else{
-                return appendData(getData)
+                return appendData(highdata)
             }
          }else{
             if(price_select.value=="acd"){
