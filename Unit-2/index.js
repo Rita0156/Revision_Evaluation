@@ -30,15 +30,19 @@ const select=document.getElementById("select")
 select.addEventListener("change",()=>{
       const dataBy=getData.filter((item)=>{
           if(select.value==""){
-              return true
+              
+              return appendData(getData)
           }else{
+            ///getData=[]
             if(item.category==select.value){
-                return true
+                lowData.push(item)
+              return true
             }
             else return false
           }
       })
       appendData(dataBy)
+      
 })
 const price_select=document.getElementById("price_select")
 price_select.addEventListener("change",()=>{
@@ -48,12 +52,24 @@ price_select.addEventListener("change",()=>{
             return appendData(getData)
          }else{
             if(price_select.value=="acd"){
-               getData.sort(function(a,b){return Number(a.price)-Number(b.price)})
+               if(lowData.length>0){
+                lowData.sort(function(a,b){return Number(a.price)-Number(b.price)})
+              return appendData(lowData)
+               }
+               else{
+                getData.sort(function(a,b){return Number(a.price)-Number(b.price)})
               return appendData(getData)
+               }
             }
             else if(price_select.value=="dcd"){
+               if(lowData.length>0){
+                lowData.sort(function(a,b){return Number(b.price)-Number(a.price)})
+                return appendData(lowData)
+               }
+               else{
                 getData.sort(function(a,b){return Number(b.price)-Number(a.price)})
-               return appendData(getData)
+                return appendData(getData)
+               }
             }
          }
     })
