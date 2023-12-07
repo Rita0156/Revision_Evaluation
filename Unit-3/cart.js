@@ -5,7 +5,7 @@ let container=document.getElementById("cont")
  let tot=document.getElementById("tot")
 function appendData(data){
     container.innerHTML=null
-  data.forEach(ele => {
+  data.forEach((ele,ind) => {
       let div=document.createElement("div")
       let title=document.createElement("h2")
       let img=document.createElement("img")
@@ -30,8 +30,12 @@ function appendData(data){
       min.className="quant"
       btn.className="det"
        btn.addEventListener("click",()=>{
+          let allData=cartItems.filter((e)=>{
+            return ele.id!=e.id
+          })
+          localStorage.setItem("cartData",JSON.stringify(allData))
+          appendData(allData)
           
-          window.location.href="./product.htm"
        })
        plus.addEventListener("click",(e)=>{
         console.log(ele.quantity,"qua")
@@ -68,5 +72,13 @@ for(let i=0; i<cartItems.length; i++){
 total.innerText="Total:"+sum
 let fin=document.createElement("h2")
 fin.innerText="Total"+"-:"+(sum+22+5)
+payment.addEventListener("click",()=>{
+    let objtot={
+         price:(sum+22+5)
+    }
+    localStorage.setItem("applying-course",JSON.stringify(objtot))
+    alert("Proceed to pay")
+    window.location.href="./payment.html"
+})
 tot.append(items,total,sip,gst,fin,payment)
 appendData(cartItems)
