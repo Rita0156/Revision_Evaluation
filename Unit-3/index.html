@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" href="./components/index.css">
+</head>
+<body>
+    <div>
+        <div id="nav">
+            <a href="./index.html">Home</a>
+            <a onclick="handalToken()" href="./login.html">Login</a>
+            <a onclick="handalToken()"  href="./signup.html">Signup</a>
+         </div>
+         <div id="srch">
+            <div >
+                <select id="select">
+                    <option value="">Select category</option>
+                    <option value="men's clothing">Men's clothing</option>
+                    <option value="jewelery">Jewelery</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="women's clothing">Women's clothing</option>
+                </select>
+            </div>
+            <div>
+                <select name="price" id="price_select">
+                     <option value="">Sort by price</option>
+                     <option value="acd">Low to high</option>
+                     <option value="dcd">High to low</option>
+                </select>
+            </div>
+         </div>
+         <div id="container">
+
+         </div>
+    </div>
+</body>
+</html>
+<script src="./index.js"></script>
