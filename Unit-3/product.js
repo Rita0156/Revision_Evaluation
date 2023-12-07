@@ -1,5 +1,5 @@
 
-const data=JSON.parse(localStorage.getItem("details"))||[]
+let data=JSON.parse(localStorage.getItem("details"))||[]
     //data=JSON.parse(data)
     console.log(data)
     const container=document.getElementById("container")
@@ -44,6 +44,7 @@ function appendData(itemdata){
             ...data,
             quantity:1
           }
+          console.log(obj,"obj",cartItems.length,"length finding",cartItems)
           cartItems.push(obj)
           console.log(obj,"object cart")
           localStorage.setItem("cartData",JSON.stringify(cartItems))

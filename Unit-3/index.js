@@ -12,7 +12,7 @@ let token=localStorage.getItem("token")
         localStorage.setItem("token",token)
     }
     
-   if(token){
+  // if(token){
     fetch("https://fakestoreapi.com/products")
     .then((req)=>{
         return req.json()
@@ -107,7 +107,7 @@ function appendData(data){
       container.append(div)
   });
 }
-}
-else{
-    window.location.href="./signup.html"
-}
+//}
+// else{
+//     window.location.href="./signup.html"
+// }
