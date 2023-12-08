@@ -13,6 +13,7 @@ let title = document.getElementById("name");
 let category = document.getElementById("category");
 let price = document.getElementById("price");
 let payBtn = document.getElementById("submit");
+let otpinp=document.getElementById("otpinp")
 //payBtn.value = `Pay ₹${applyData[0].price} 🔒`;
 //title.textContent = `Title : ${applyData[0].name}`;
 //category.textContent = `Category : ${applyData[0].category}`;
@@ -38,7 +39,7 @@ form.addEventListener("submit",function(e){
     let expiryyear = document.getElementById("expiryyear").value;
     let cvv = document.getElementById("cvv").value;
     //let time=document.createElement("h2")
-    checkTime(30)
+    
     if(cardNumber && expirymonth && expiryyear && cvv){
         
          
@@ -69,28 +70,36 @@ function checkTime(timer){
        }
     },1000)
  }
+  let mnb;
+ function handalOTP(){
+     let otp = Math.floor(1000 + Math.random() * 9000);
+     mnb=otp
 
+     alert("Your OTP is " + otp);
 
-function checkOTP(){
+     checkTime(30)
+     //checkOTP(otp)
+ }
+
+function checkOTP(mnb){
     
-    let otp = Math.floor(1000 + Math.random() * 9000);
-  
+    //let mnb;
 
-    alert("Your OTP is " + otp);
+   // let verifyOtp = prompt("Enter OTP ");
 
-    let verifyOtp = prompt("Enter OTP ");
-
-    if(otp == verifyOtp){
+   //setTimeout(()=>{
+    if(mnb == otpinp.value){
         let paymentCont = document.getElementById("payment-container");
         let thankyouImg = document.querySelector(".thankyou-img");
         paymentCont.style.display = "none";
         thankyouImg.style.display = "block"
-        flag=false
-        setTimeout(function(){
+        //flag=false
+        //setTimeout(function(){
             window.location.href = "index.html"
-        },2000)
-    }else{
-        flag=false
-        alert("Wrong OTP");
-    }
+       // },2000)
+     }//else{
+    //     //flag=false
+    //     alert("Wrong OTP");
+    // }
+  // },3000)
 }

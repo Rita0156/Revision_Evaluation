@@ -77,6 +77,8 @@
                     <label for="">Security Code</label>
                     <input type="number" id="cvv" onKeyPress="if(this.value.length==3) return false;" placeholder="CVV" />
                   </div>
+                  <button onclick="handalOTP()" style="width: 100px; margin: auto; margin-bottom: 20px; padding: 10px; background-color: orange; font-weight: bold;" id="otpbtn">Send OTP</button>
+                  <input type="number" id="otpinp" placeholder="enter opt">
                   <h3 id="h3t"></h3>
                   <input type="submit" onclick="checkTime()" value="PROCEED TO PAY 🔒" id="submit" />
                 </form>
