@@ -97,9 +97,9 @@ function checkOTP(mnb){
         //setTimeout(function(){
             window.location.href = "index.html"
        // },2000)
-     }//else{
+     }else{
     //     //flag=false
-    //     alert("Wrong OTP");
-    // }
+         alert("Wrong OTP");
+     }
   // },3000)
 }

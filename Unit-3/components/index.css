@@ -60,14 +60,14 @@
     font-weight: bold;
     border-radius: 10px;
     cursor: pointer;
-}#btns{
+}#button-wrapper{
     display: flex;
     width: 20%;
     margin: auto;
     margin-top: 20px;
     
 }
-#btns button{
+#button-wrapper button{
     background-color: orange;
     color: white;
     font-weight: bold;
