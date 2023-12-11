@@ -1,0 +1,23 @@
+#inp #search{
+    width: 50%;
+    display: block;
+    padding-left: 30px;
+    height: 30px;
+    margin-top: 30px;
+    margin: auto;
+    
+}
+#inp #search-cont{
+    width: 52%;
+    height: 300px;
+    margin: auto;
+    border: 2px solid rgb(85, 82, 82);
+    border-top:none ;
+    overflow: scroll;
+    padding-left: 30px;
+}
+#inp{
+    width: 60%;
+    margin: auto;
+    margin-top: 30px;
+}
