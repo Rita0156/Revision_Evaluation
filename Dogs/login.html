@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./styleCompo/login.css">
+</head>
+<body>
+    <div id="nav">
+        <a href="./index.html">Home</a>
+        <a href="./login.html">Login</a>
+    </div>
+    <div id="form">
+            <h2>Login Page</h2>
+            <input type="email" name="email" id="email" placeholder="Enter email" ><br/>
+            <input type="password" name="password" id="pass" placeholder="Enter password" ><br/>
+             <button id="btn">Submit</button>
+    </div>
+</body>
+</html>
+<script>
+    let email=document.getElementById("email")
+    let pass=document.getElementById("pass")
+    let btn=document.getElementById("btn")
+
+    const fetchData=()=>{
+        let obj={
+            email:email.value,
+            password:pass.value
+        }
+        fetch("",{
+            method:"POST",
+            headers:{
+                
+            },
+            body:JSON.stringify(obj)
+
+        })
+        .then((req)=>{
+            return req.json()
+        })
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+                console.error(err);
+        })
+    }
+
+    btn.addEventListener("click",()=>{
+
+    })
+
+</script>

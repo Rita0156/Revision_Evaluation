@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dogs Registration page</title>
+    <link rel="stylesheet" href="./styleCompo/index.css">
+</head>
+<body>
+    <div id="nav">
+        <a href="./index.html">Home</a>
+        <a href="./login.html">Login</a>
+    </div>
+    <div id="form">
+        <h2 style="text-align: center;">Dogs Registration Form</h2>
+        <form>
+           <div id="inside">
+            <input id="name" type="text" placeholder="Name of breed"/><br>
+            <input id="age" type="number" placeholder="Enter age of dog"/><br>
+            <input id="img" style="margin-bottom: 15px;" type="text" placeholder="Enter dog image url">
+            <select name="pet" id="gender">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select><br/>
+            <input id="city" type="text" placeholder="Enter City"/><br>
+            <input id="submit" type="submit" value="Submit">
+           </div>
+        </form>
+    </div>
+</body>
+</html>
+<script>
+    let dog=document.getElementById("name")
+    let age=document.getElementById("age")
+    let img=document.getElementById("img")
+    let gen=document.getElementById("gender")
+    let city=document.getElementById("city")
+    let form=document.querySelector("form")
+    let dogData=JSON.parse(localStorage.getItem("dogs"))||[]
+    form.addEventListener("submit",()=>{
+        let obj={
+            name:dog.value,
+            age:age.value,
+            img:img.value,
+            gender:gen.value,
+            city:city.value
+        }
+        dogData.push(obj)
+        localStorage.setItem("dogs",JSON.stringify(dogData))
+        alert(`Dog ${dog.value} is registered successfully`)
+    })
+</script>

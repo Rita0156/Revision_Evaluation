@@ -1,0 +1,53 @@
+#form{
+    width: 40%;
+    margin: auto;
+    border: 2px solid black;
+}
+
+#inside{
+    width: 95%;
+    padding: 20px;
+    margin: auto;
+    text-align: center;
+}
+#inside input{
+    width: 80%;
+    height: 30px;
+    display: block;
+    margin: auto;
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+#inside select{
+    width: 81%;
+    height: 30px;
+    display: block;
+    margin: auto;
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+#inside #submit{
+    width: 40%;
+    text-align: center;
+    background-color: orange;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+#nav{
+    width: 98%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 10px;
+}
+#nav a{
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+}

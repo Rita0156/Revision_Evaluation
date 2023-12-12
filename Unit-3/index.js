@@ -48,6 +48,7 @@ setTimeout(async function(){
   let data = await res.json();
   let limit = 4;
   var ind=1
+  prev.style.color="grey"
  let total=(data.length/limit)
   btns.forEach((btn) => {
       btn.addEventListener("click",function(){
@@ -59,15 +60,17 @@ setTimeout(async function(){
           appendData(resArr);
       })
   })
+  
   next.addEventListener("click",()=>{
     //buttonWrapper.innerHTML=null
     //for(let i=1; i<=total; i++){
       if(ind==total){
         next.disabled=true;
         next.style.color="grey"
-      }else if(ind<total){
+      }else if(ind<total-1){
         //btns[ind].forEach(btnb=> btnb.classList.remove('active'));
           //btns[ind].classList.add("active")
+          prev.style.color="white"
           console.log(ind,ind)
         ind=ind+1
          //ind = btns[ind].innerText;
@@ -77,13 +80,16 @@ setTimeout(async function(){
     //}
     
   })
+  
+  
   prev.addEventListener("click",()=>{
     if(ind==1 || ind<1){
       prev.disabled=true;
       prev.style.color="grey"
-    }else if(ind<total){
+    }else if(ind<=total){
       //btns[ind].forEach(btnb=> btnb.classList.remove('active'));
         //btns[ind].classList.add("active")
+        next.style.color="white"
         console.log(ind,ind)
       ind=ind-1
        //ind = btns[ind].innerText;
@@ -92,6 +98,7 @@ setTimeout(async function(){
     }
   })
 },500)
+
 //for(let i=1; i<=total; i++){
   
 //}

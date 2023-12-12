@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            width: 500px;
+            font-size: 20px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <input id="inp" oninput="deBouncing(main(),3000)" type="text" >
+</body>
+</html>
+<script>
+    let inp=document.getElementById("inp")
+    let id;
+          function deBouncing(func,delay){
+             if(id){
+                clearTimeout(id)
+             }
+             id=setTimeout(()=>{
+                func
+             },delay)
+          }
+          function main(){
+            console.log(inp.value);
+          }
+
+
+
+</script>
