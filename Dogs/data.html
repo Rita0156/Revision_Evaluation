@@ -27,21 +27,64 @@
     <div id="container">
 
     </div>
+    <div>
+        <div id="button-wrapper"></div>
+    </div>
 </body>
 </html>
 <script>
     let container=document.getElementById("container")
-    let dogData=JSON.parse(localStorage.getItem("dogs"))||[]
-    let filData=[...dogData]
-    console.log(filData,"fildata")
-    Display(dogData)
-    console.log(dogData)
+    //let dogData=JSON.parse(localStorage.getItem("dogs"))||[]
+    let buttonWrapper=document.getElementById("button-wrapper")
+    let filData=[]
+    
+   function pagination(data,pageNo,limit){
+          return data.slice((pageNo-1)*limit,(pageNo*limit-1)+1)
+   }
+
+    const fetchData=()=>{
+      fetch("http://localhost:3030/dogs")
+      .then((req)=>{
+         return req.json()
+      })
+      .then((res)=>{
+         console.log(res);
+         filData=[...res]
+         let limit=4;
+         let total=Math.ceil((res.length)/limit)
+         buttonWrapper.innerHTML=null
+         for(let i=1; i<=total; i++){
+             buttonWrapper.append(createButton(i))
+         }
+         let resArray=pagination(res,1,limit)
+         Display(resArray)
+      })
+    }
+    fetchData()
+    //console.log(filData,"fildata")
+    //Display(dogData)
+    //console.log(dogData)
+    function createButton(i){
+      let btn=document.createElement("button")
+      btn.innerText=i
+      return btn
+    }
+
+    setTimeout(()=>{
+      let butns=document.querySelectorAll("button-wrapper button")
+      butns.addEventListener("click",()=>{
+         
+      })
+    },300)
      let age=document.getElementById("agesel")
      let gender=document.getElementById("gendersel")
+
+
+
      age.addEventListener("change",()=>{
-        let data=dogData.filter((ele)=>{
+        let data=filData.filter((ele)=>{
            if(age.value==""){
-            return  Display(dogData)
+            return  Display(filData)
            }else{
              if(age.value=="low"){
                 filData.sort(function(a,b){return Number(a.age)-Number(b.age)})
@@ -81,26 +124,50 @@
             let h2=document.createElement("h2")
             h2.innerText=element.name
             let city=document.createElement("h2")
-            city.innerText=element.city
+            city.innerText=element.place
             let gender=document.createElement("h2")
             gender.innerText=element.gender
             let img=document.createElement("img")
-            img.src=element.img
+            img.src="https://static.vecteezy.com/system/resources/thumbnails/026/910/473/small/cute-cartoon-fox-isolated-on-ground-ai-generated-png.png"
             let det=document.createElement("button")
             let age=document.createElement("h2")
             age.innerText=element.age
             det.innerText="Remove"
              det.addEventListener("click",()=>{
-                let lsData=dogData.filter((el)=>{
-                    return element.id!=el.id
-                })
-                localStorage.setItem("dogs",JSON.stringify(lsData))
-                Display(lsData)
+               let id=element.id
+               console.log(id)
+                const deleteData=(id)=>{
+                  fetch(`http://localhost:3030/dogs/${id}`,{
+                  method:"DELETE",
+                  headers:{
+                  "Content-Type": "application/json",
+                  }
+            
+
+             })
+            .then((req)=>{
+            return req.json()
+            })
+           .then((res)=>{
+            console.log(res);
+            alert("Deleted Successfull")
+            //window.location.href="./data.html"
+
+            })
+            .catch((err)=>{
+                console.error(err);
+                alert("Something went wrong")
+              })
+            }
+                //Display(lsData)
+                deleteData(id)
+                fetchData()
              })
             div.append(h2,img,age,gender,city,det)
             container.append(div)
 
          });
+
     }
     
 
