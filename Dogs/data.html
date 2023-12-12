@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Page</title>
+    <link rel="stylesheet" href="./styleCompo/data.css">
+</head>
+<body>
+    <div id="nav">
+        <a href="./index.html">Home</a>
+        <a href="./data.html">Data</a>
+        <a href="./report.html">Report</a>
+    </div>
+    <div id="sel">
+        <select name="age" id="agesel">
+            <option value="">Sort by age</option>
+            <option value="low">Low to High</option>
+            <option value="high">Hihg to low</option>
+        </select>
+        <select name="pet" id="gendersel">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+    </div>
+    <div id="container">
+
+    </div>
+</body>
+</html>
+<script>
+    let container=document.getElementById("container")
+    let dogData=JSON.parse(localStorage.getItem("dogs"))||[]
+    let filData=[...dogData]
+    console.log(filData,"fildata")
+    Display(dogData)
+    console.log(dogData)
+     let age=document.getElementById("agesel")
+     let gender=document.getElementById("gendersel")
+     age.addEventListener("change",()=>{
+        let data=dogData.filter((ele)=>{
+           if(age.value==""){
+            return  Display(dogData)
+           }else{
+             if(age.value=="low"){
+                filData.sort(function(a,b){return Number(a.age)-Number(b.age)})
+                //Display(dogData)
+                return  Display(filData)
+             }else if(age.value=="high"){
+                filData.sort(function(a,b){return Number(b.age)-Number(a.age)})
+                return  Display(filData)
+             }
+             
+           }
+        })
+       
+     })
+
+     gender.addEventListener("change",()=>{
+        let fdata=filData.filter((ele)=>{
+           if(gender.value==""){
+            return  true
+           }else{
+             if(gender.value===ele.gender){
+                return true
+             }else{
+                return false
+             }
+             
+           }
+        })
+        Display(fdata)
+       
+     })
+
+    function Display(data){
+        container.innerHTML=null
+         data.forEach(element => {
+            let div=document.createElement("div")
+            let h2=document.createElement("h2")
+            h2.innerText=element.name
+            let city=document.createElement("h2")
+            city.innerText=element.city
+            let gender=document.createElement("h2")
+            gender.innerText=element.gender
+            let img=document.createElement("img")
+            img.src=element.img
+            let det=document.createElement("button")
+            let age=document.createElement("h2")
+            age.innerText=element.age
+            det.innerText="Remove"
+             det.addEventListener("click",()=>{
+                let lsData=dogData.filter((el)=>{
+                    return element.id!=el.id
+                })
+                localStorage.setItem("dogs",JSON.stringify(lsData))
+                Display(lsData)
+             })
+            div.append(h2,img,age,gender,city,det)
+            container.append(div)
+
+         });
+    }
+    
+
+</script>

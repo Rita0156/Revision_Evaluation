@@ -39,12 +39,14 @@
     let form=document.querySelector("form")
     let dogData=JSON.parse(localStorage.getItem("dogs"))||[]
     form.addEventListener("submit",()=>{
+        let ren=Math.random()
         let obj={
             name:dog.value,
             age:age.value,
             img:img.value,
             gender:gen.value,
-            city:city.value
+            city:city.value,
+            id:ren
         }
         dogData.push(obj)
         localStorage.setItem("dogs",JSON.stringify(dogData))

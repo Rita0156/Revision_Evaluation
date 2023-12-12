@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+    <style>
+        #nav{
+    width: 98%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 10px;
+}
+#nav a{
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+}
+table{
+    width: 60%;
+    margin: auto;
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <a href="./index.html">Home</a>
+        <a href="./data.html">Data</a>
+        <a href="./report.html">Report</a>
+    </div>
+    <div>
+        <h1 style="text-align: center;">Reports of Dogs</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Total Dogs</td>
+                    <th>Female Dogs</td>
+                    <th>Male Dogs</td>
+                    <th>Average Age</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    
+                    <td id="tot"></td>
+                    <td id="fe"></td>
+                    <td id="ma"></td>
+                    <td id="ave"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+<script>
+    let tot=document.getElementById("tot")
+    let fe=document.getElementById("fe")
+    let ma=document.getElementById("ma")
+    let ave= document.getElementById("ave")
+    let dogData=JSON.parse(localStorage.getItem("dogs"))||[]
+    tot.innerText=dogData.length
+    let sum=0
+    let f=0
+    let m=0
+    for(let i=0; i<dogData.length; i++){
+        sum+=Number(dogData[i].age);
+        if(dogData[i].gender=="Female"){
+           f++
+        }
+        else if(dogData[i].gender=="Male"){
+           m++
+        }
+    }
+    fe.innerText=f
+    ma.innerText=m
+    ave.innerText=(sum/dogData.length).toFixed(2)
+</script>
