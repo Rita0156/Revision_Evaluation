@@ -27,75 +27,83 @@
     <div id="container">
 
     </div>
-    <div>
-        <div id="button-wrapper"></div>
+    <div id="btns">
+        <!-- <div id="button-wrapper"></div> -->
+        <button id="next">Next</button>
+          <h2 id="pageNo"></h2>
+        <button id="prev">Previous</button>
+
     </div>
 </body>
 </html>
 <script>
     let container=document.getElementById("container")
     //let dogData=JSON.parse(localStorage.getItem("dogs"))||[]
-    let buttonWrapper=document.getElementById("button-wrapper")
+    //let buttonWrapper=document.getElementById("button-wrapper")
+    let pageNo=document.getElementById("pageNo")
+    let next=document.getElementById("next")
+    let prev=document.getElementById("prev")
     let filData=[]
     let page=1
     let limit=4
     
-   function pagination(data,pageNo,limit){
-          return data.slice((pageNo-1)*limit,(pageNo*limit-1)+1)
-   }
+   // function pagination(data,pageNo,limit){
+   //        return data.slice((pageNo-1)*limit,(pageNo*limit-1)+1)
+   // }
 
     const fetchData=(page,limit)=>{
-      fetch(`http://localhost:3030/dogs?page${page}&limit=${limit}`)
+      fetch(`http://localhost:3030/dogs?_page=${page}&_limit=${limit}`)
       .then((req)=>{
          return req.json()
       })
       .then((res)=>{
-         console.log(res);
+        // let lengthGet=res.headers.get('X-Total-Count');
+         console.log(res,res.length);
+         console.log(res.header);
+         
          
          //let limit=4;
          let total=Math.ceil((res.length)/limit)
-         buttonWrapper.innerHTML=null
+         //buttonWrapper.innerHTML=null
          let allPages=[]
          for(let i=0; i<=total; i++){
            allPages.push(i)
          }
-         for(let i=1; i<=total; i++){
-             buttonWrapper.append(createButton(i))
-         }
+         
 
          let lastPage=limit*page
          let firstPage=lastPage-limit
 
-         let currentPage=res.slice(firstPage,lastPage)
-         filData=[...currentPage]
+         // let currentPage=res.slice(firstPage,lastPage)
+         // filData=[...currentPage]
          
          
          //let resArray=pagination(res,1,limit)
-         Display(currentPage)
+         Display(res)
       })
     }
     fetchData(page,limit)
     //console.log(filData,"fildata")
     //Display(dogData)
     //console.log(dogData)
-    function createButton(i){
-      let btn=document.createElement("button")
-      //btn.innerText=i
-      let activeClass = '';
-       if(i==1){
-        activeClass = 'active';
-       }
-      btn.className = `.pagination-button ${activeClass}`;
-      btn.innerText = i;
-      btn.addEventListener("click",()=>{
-         page=i
-         fetchData(page,limit)
-      })
+   //  function createButton(i){
+   //    let btn=document.createElement("button")
+   //    //btn.innerText=i
+   //    let activeClass = '';
+   //     if(i==1){
+   //      activeClass = 'active';
+   //     }
+   //    btn.className = `.pagination-button ${activeClass}`;
+   //    btn.innerText = i;
+   //    btn.addEventListener("click",()=>{
+   //       page=i
+   //       fetchData(page,limit)
+   //    })
 
       
    
-      return btn
-    }
+   //    return btn
+   //  }
 
    //  setTimeout(async()=>{
    //    let butns=document.querySelectorAll("#button-wrapper>button")
@@ -154,6 +162,29 @@
         Display(fdata)
        
      })
+
+     next.addEventListener("click",()=>{
+         page=page+1
+         pageNo.innerText=page
+         prev.style.color="black"
+         fetchData(page,limit)
+     })
+     if(page==1){
+         prev.style.color="grey"
+       }
+      
+     prev.addEventListener("click",()=>{
+       if(page==1){
+         prev.disabled=true
+         prev.style.color="grey"
+       }else if(page>1){
+         prev.style.color="black"
+         page=page-1
+         pageNo.innerText=page
+         fetchData(page,limit)
+       }
+     })
+ pageNo.innerText=page
 
     function Display(data){
         container.innerHTML=null
