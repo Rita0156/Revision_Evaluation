@@ -37,45 +37,83 @@
     //let dogData=JSON.parse(localStorage.getItem("dogs"))||[]
     let buttonWrapper=document.getElementById("button-wrapper")
     let filData=[]
+    let page=1
+    let limit=4
     
    function pagination(data,pageNo,limit){
           return data.slice((pageNo-1)*limit,(pageNo*limit-1)+1)
    }
 
-    const fetchData=()=>{
-      fetch("http://localhost:3030/dogs")
+    const fetchData=(page,limit)=>{
+      fetch(`http://localhost:3030/dogs?page${page}&limit=${limit}`)
       .then((req)=>{
          return req.json()
       })
       .then((res)=>{
          console.log(res);
-         filData=[...res]
-         let limit=4;
+         
+         //let limit=4;
          let total=Math.ceil((res.length)/limit)
          buttonWrapper.innerHTML=null
+         let allPages=[]
+         for(let i=0; i<=total; i++){
+           allPages.push(i)
+         }
          for(let i=1; i<=total; i++){
              buttonWrapper.append(createButton(i))
          }
-         let resArray=pagination(res,1,limit)
-         Display(resArray)
+
+         let lastPage=limit*page
+         let firstPage=lastPage-limit
+
+         let currentPage=res.slice(firstPage,lastPage)
+         filData=[...currentPage]
+         
+         
+         //let resArray=pagination(res,1,limit)
+         Display(currentPage)
       })
     }
-    fetchData()
+    fetchData(page,limit)
     //console.log(filData,"fildata")
     //Display(dogData)
     //console.log(dogData)
     function createButton(i){
       let btn=document.createElement("button")
-      btn.innerText=i
+      //btn.innerText=i
+      let activeClass = '';
+       if(i==1){
+        activeClass = 'active';
+       }
+      btn.className = `.pagination-button ${activeClass}`;
+      btn.innerText = i;
+      btn.addEventListener("click",()=>{
+         page=i
+         fetchData(page,limit)
+      })
+
+      
+   
       return btn
     }
 
-    setTimeout(()=>{
-      let butns=document.querySelectorAll("button-wrapper button")
-      butns.addEventListener("click",()=>{
-         
-      })
-    },300)
+   //  setTimeout(async()=>{
+   //    let butns=document.querySelectorAll("#button-wrapper>button")
+   //    let req=await fetch('http://localhost:3030/dogs')
+   //    let data=await req.json()
+   //    let limit=4
+   //    butns.forEach((btn)=>{
+   //        btn.addEventListener("click",()=>{
+            
+   //             btn.forEach(btnb=> btnb.classList.remove('active'));
+   //             btn.classList.add("active")
+   //             let i = btn.innerText;
+               
+   //             let resArr = pagination(data, i, limit);
+   //             Display(resArr);
+   //        })
+   //    })
+   //  },300)
      let age=document.getElementById("agesel")
      let gender=document.getElementById("gendersel")
 
