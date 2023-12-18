@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import "./login.css"
 import { useState } from "react";
+import { Navigate } from 'react-router-dom'
 function Login() {
     const [email,setEmail]=useState("")
     const [password,setPass]=useState("")
+    
     const register=(e)=>{
         e.preventDefault()
         let obj={
@@ -22,6 +24,10 @@ function Login() {
             })
             .then((res)=>{
                 console.log(res);
+                let token=localStorage.setItem("apptoken",JSON.stringify(res.token))
+                if(token!=""){
+                    <Navigate to="/dashboard" replace={true}/>
+                }
             })
             .catch((err)=>{
                 console.log(err);

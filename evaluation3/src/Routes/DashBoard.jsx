@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 //import Pagination from "../component/Pagination";
 //import "./dash.css"
+import { Navigate } from 'react-router-dom'
 function Dashboard() {
     const [data,setdata]=useState([])
     const [currentPage,setCurrent]=useState(1)
     const limit=20
+    let token=(localStorage.getItem("apptoken"))||""
     
     const getData=()=>{
         fetch(`https://jsonplaceholder.typicode.com/photos?_page=${currentPage}&_limit=${limit}`)
@@ -20,20 +22,26 @@ function Dashboard() {
             console.log(err);
         })
     }
-    
+     const handalLog=()=>{
+        token=""
+        localStorage.setItem("apptoken",token)
+        return <Navigate replace to="/login" />
+     }
     
     console.log(data,"all data")
     useEffect(()=>{
           getData()
     },[currentPage])
-    
+    if (!token) {
+        return <Navigate replace to="/login" />;
+    }else
   return (
     <div>
         <h3>Dashboard</h3>
-      <div style={{display:"flex", justifyContent:"space-around",height:"30px"}} >
+      <div  >
       
-      <h4 data-testid="token">TOKEN</h4>
-      <button data-testid="logout-btn">Logout</button>
+      <h4 data-testid="token">TOKEN= {token}</h4>
+      <button onClick={handalLog} data-testid="logout-btn">Logout</button>
       </div>
       {/* <ul data-testid="item-container">
         {data.length>0 ? data.map((item) => {
