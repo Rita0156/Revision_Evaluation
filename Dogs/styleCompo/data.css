@@ -85,3 +85,40 @@
    font-size: 27px;
    font-weight: bold;
 }
+#modal{
+    display: none;
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#modal input{
+    width: 100%;
+    height: 30px;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+#modal button{
+    margin-bottom: 15px;
+}
+#modal #xbtn{
+    display: block;
+    width: 30px;
+    text-align: center;
+    align-items: end;
+    justify-content: right;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    margin: auto;
+    
+    
+}
+#modal #sub{
+     background-color: orange;
+     color: white;
+     display: block;
+     font-weight: bold;
+     margin: auto;
+     font-size: 20px;
+}

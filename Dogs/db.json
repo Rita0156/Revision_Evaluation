@@ -1,17 +1,10 @@
 {
   "dogs": [
     {
-      "id": 1,
-      "name": "Cherry",
-      "age": 2,
-      "place": "Visakhapatnam",
-      "gender": "Male"
-    },
-    {
       "id": 2,
-      "name": "Tommy",
-      "age": 3,
-      "place": "Banglore",
+      "name": "Tom",
+      "age": "7",
+      "place": "Pune",
       "gender": "Female"
     },
     {
@@ -62,6 +55,13 @@
       "gender": "Female",
       "place": "kolhapur",
       "id": 9
+    },
+    {
+      "name": "KItty",
+      "age": "4",
+      "gender": "Female",
+      "place": "Raipur",
+      "id": 10
     }
   ]
 }
