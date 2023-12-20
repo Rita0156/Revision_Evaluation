@@ -1,0 +1,36 @@
+.stop{
+    width: 30%;
+    margin: auto;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-top: 50px;
+}
+.stop input{
+    display: block;
+    width: 80%;
+    margin: auto;
+    font-weight: bold;
+    font-size: 20px;
+}
+.time{
+    width: 80%;
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+    background-color: gray;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.stop button{
+    display: block;
+    margin: auto;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
+}
