@@ -8,24 +8,24 @@ const Slides=()=>{
                     "https://i.pinimg.com/564x/5e/76/48/5e7648665906cfac23a7dfa35c640ba2.jpg"
                  ]
     const [current,setCurrent]=useState(0)
-    const [img,setImg]=useState(images[0])
+    //const [img,setImg]=useState(images[0])
     useEffect(()=>{
         const interval=setInterval(()=>{
             if(current==images.length-1){
                 setCurrent(0)
-                setImg(images[current])
+                //setImg(images[current])
             }else{
                 setCurrent(current+1)
-                setImg(images[current])
+               // setImg(images[current])
             } 
         },3000)
 
         return ()=> clearInterval(interval)
       
-    },[current,img])
+    },[current])
     return(
         <div style={{width:"50%",margin:"auto",border:"5px solid black",marginTop:"40px"}}>
-              <img style={{width:"100%",height:"500px"}} src={img}/>
+              <img style={{width:"100%",height:"500px"}} src={images[current]}/>
         </div>
     )
 }
