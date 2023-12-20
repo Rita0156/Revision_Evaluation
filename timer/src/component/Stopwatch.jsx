@@ -13,7 +13,7 @@ const Stopwatch=()=>{
         if(isClick){
             setMin(val-1)
             setSec(59)
-           timer=setInterval(()=>{
+            timer=setInterval(()=>{
             setSec(sec-1)
                if(sec==0){
                 setMin(min-1)
@@ -21,13 +21,12 @@ const Stopwatch=()=>{
                }
            },1000)
            if(min==0 && sec==0){
-             clearInterval(timer)
-             setIsClick(false)
+            clearInterval(timer)
            }
         }
        //if(min==val){
         return ()=> clearInterval(timer)
-    },[sec,min])
+    },[sec,min,val])
 
     return (
         <div>

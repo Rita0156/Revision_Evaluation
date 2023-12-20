@@ -23,11 +23,11 @@ const Timer=()=>{
         },1000)
         if(min==val){
           clearInterval(id)
-          setIsClick(false)
         }
+        
   }
     return ()=>clearInterval(id)
-  },[min,sec])
+  },[min,sec,val])
     
     return (
         <div>
