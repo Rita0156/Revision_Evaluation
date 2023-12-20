@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import "./stop.css"
 import { useEffect } from "react"
 const Timer=()=>{
@@ -6,28 +6,28 @@ const Timer=()=>{
     const [sec,setSec]=useState(0)
     const [val,setValue]=useState("")
     const [isClick,setIsClick]=useState(false)
-    useEffect(()=>{
-        var timer=null
-        if(isClick){
-           timer=setInterval(()=>{
-               if(sec==59){
-                setMin(min+1)
-                setSec(0)
-               }else if(sec<59){
-                   setSec(sec+1)
-               }
-           },1000)
-           if(val==min){
-            clearInterval(timer)
-           }
-        }
-       //if(min==val){
-        return ()=> clearInterval(timer)
-       //}
-    },[min,sec])
-
+    let id=null
+    //const handalStart=()=>{
+        
+        
     
-
+  useEffect(()=>{
+    if(isClick){
+        id=setInterval(()=>{
+               setSec(sec+1)
+              if(sec===59){
+                  setSec((sec)=>sec=0)
+                  setMin((min)=>min+1)
+                  
+              }
+        },1000)
+        if(min==val){
+          clearInterval(id)
+          setIsClick(false)
+        }
+  }
+    return ()=>clearInterval(id)
+  },[min,sec])
     
     return (
         <div>

@@ -6,26 +6,23 @@ const Stopwatch=()=>{
     const [sec,setSec]=useState(0)
     const [val,setValue]=useState("")
     const [isClick,setIsClick]=useState(false)
-
+    var timer=null
     useEffect(()=>{
-        var timer=null
+        
         
         if(isClick){
-            
+            setMin(val-1)
+            setSec(59)
            timer=setInterval(()=>{
-            if(val>0){
-                setMin(val-1)
-                setSec(59)
-            }
+            setSec(sec-1)
                if(sec==0){
                 setMin(min-1)
                 setSec(0)
-               }else if(sec>0){
-                   setSec(sec-1)
                }
            },1000)
-           if(min==0){
-            clearInterval(timer)
+           if(min==0 && sec==0){
+             clearInterval(timer)
+             setIsClick(false)
            }
         }
        //if(min==val){
