@@ -13,6 +13,7 @@ const Timer=()=>{
     
   useEffect(()=>{
     if(isClick){
+        
         id=setInterval(()=>{
                setSec(sec+1)
               if(sec===59){
@@ -21,13 +22,16 @@ const Timer=()=>{
                   
               }
         },1000)
-        if(min==val){
-          clearInterval(id)
-        }
+        
         
   }
+   if(min==val){
+     clearInterval(id)
+     setIsClick(false)
+     setValue('')
+   }
     return ()=>clearInterval(id)
-  },[min,sec,val])
+  },[min,sec,val,isClick])
     
     return (
         <div>
@@ -38,7 +42,10 @@ const Timer=()=>{
                  <h2>Minute-:{min}</h2>
                  <h2>Seconds-:{sec}</h2>
                  </div>
-                 <button onClick={()=>setIsClick(true)}>
+                 <button onClick={()=>{setIsClick(true)
+                     setMin(0)
+                     setSec(0)
+                  }}>
                       Start 
                  </button>
             </div>
