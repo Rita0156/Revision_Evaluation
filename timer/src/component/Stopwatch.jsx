@@ -28,7 +28,7 @@ const Stopwatch=()=>{
          if(min==0 && sec==0 && val>0){
              clearInterval(timer)
              setIsClick(false)
-             setValue('')
+             //setValue('')
             }
        
         return ()=> clearInterval(timer)

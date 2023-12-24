@@ -1,20 +1,35 @@
 import React, { useState } from "react";
 import { loginFunction } from "../Redux/AuthReducer/action";
-
+import { LOGIN_SUCCESS } from "../Redux/AuthReducer/actionTypes";
+import { Navigate, useLocation,useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux";
+import axios from "axios"
 
 const Login = () => {
+
+  const location = useLocation();
+  const dispatch=useDispatch();
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
- const handalSubmit=(e)=>{
+  const navigate=useNavigate()
+
+  const handalSubmit=(e)=>{
   
   e.preventDefault()
-  const obj={
-    email:email,
-    password:password
+  if (email && password) {
+    const payload = {
+      email: email,
+      password:password
+    }
+    console.log(payload)
+    dispatch(loginWatch(payload)).then((r) => {
+      if (r.type == LOGIN_SUCCESS) {
+        navigate(comingFrom,{replace:true})
+      }
+    })
   }
-  loginFunction(obj)
  }
-
+ const comingFrom=location.state?.from.pathname || "/"
   return (
     <div>
       <h2>LOGIN</h2>
