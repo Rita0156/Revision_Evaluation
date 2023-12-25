@@ -8,36 +8,34 @@ import {getDataMusic} from "../Redux/AppReducer/action"
 
 
 const SingleWatch = () => {
-  const [currentId,setCurrentId]=useState({})
-      const {id}=useParams()
-      const data=useSelector((store)=>store.watches)
-      console.log(id,"single")
-      const dispatch=useDispatch()
+  const selector = useSelector((store) => store.AppReducer.watches);
+  const [data, setData] = useState({})
+  const dispatch=useDispatch()
+  const {id}=useParams()
+  useEffect(() => {
+    if (selector.length == 0) {
+      dispatch(getDataMusic())
+    }},[id,selector])
+  
 
-      
-
-      useEffect(()=>{
+    useEffect(() => {
+      if (id){
+         let cur = selector.find((item) =>item.id == id)
+         console.log(id)
+         cur && setData(cur)
+         console.log(data,"cur")
         
-          if(id){
-            const currentMusic=data.find((item)=>item.id==id);
-            currentMusic && setCurrentId(currentMusic)
-            console.log(currentMusic,"wa");
-          }
-      },[id,data])
-
-      useEffect(()=>{
-        if(data.length===0){
-            dispatch(getDataMusic())
-        }
-    },[data.length,dispatch])
+      }
+    },[id,selector])
+    console.log(selector,"sin");
   return (
     <div>
-      <h2>{currentId.name}</h2>
+      <h2>{data.name}</h2>
       <div>
-        <img src={currentId.image} alt="Cover Pic" />
+        <img src={data.image} alt="Cover Pic" />
       </div>
       <div>
-        <div>{currentId.category}</div>
+        <div>{data.category}</div>
       </div>
     </div>
   );

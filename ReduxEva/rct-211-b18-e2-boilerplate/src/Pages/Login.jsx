@@ -22,7 +22,7 @@ const Login = () => {
       password:password
     }
     console.log(payload)
-    dispatch(loginWatch(payload)).then((r) => {
+    dispatch(loginFunction(payload)).then((r) => {
       if (r.type == LOGIN_SUCCESS) {
         navigate(comingFrom,{replace:true})
       }
